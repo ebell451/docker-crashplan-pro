@@ -7,7 +7,7 @@ from Jinja2 templates.
 <defs>
   <app>
     <id>10</id>
-    <gui>True</gui>
+    <gui_type>x11</gui_type>
     <friendly_name>CrashPlan PRO</friendly_name>
     <name>{{ defs.app.friendly_name|lower|replace(' ', '-') }}</name>
     <project>
@@ -243,6 +243,23 @@ latest version will also bring the latest version of CrashPlan.
     </documentation>
     <!-- Changelog of the application. -->
     <history>
+      <release>
+        <version>2.6.2</version>
+        <date>2019-02-20</date>
+        <change>Upgraded CrashPlan PRO to version 6.9.2.</change>
+      </release>
+      <release>
+        <version>2.6.1</version>
+        <date>2018-12-19</date>
+        <change>Upgraded to build 827 of CrashPlan PRO 6.9.0.</change>
+        <change>Updated logo of Crashplan.</change>
+      </release>
+      <release>
+        <version>2.6.0</version>
+        <date>2018-12-09</date>
+        <change>Upgraded CrashPlan PRO to version 6.9.0.</change>
+        <change>Make sure only the numerical kernel version is reported to CrashPlan PRO.</change>
+      </release>
       <release>
         <version>2.5.0</version>
         <date>2018-09-20</date>

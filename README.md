@@ -38,12 +38,13 @@ is protected and easily accessible.
       * [User/Group IDs](#usergroup-ids)
       * [Accessing the GUI](#accessing-the-gui)
       * [Security](#security)
+         * [SSVNC](#ssvnc)
          * [Certificates](#certificates)
          * [VNC Password](#vnc-password)
-      * [Shell Access](#shell-access)
       * [Reverse Proxy](#reverse-proxy)
          * [Routing Based on Hostname](#routing-based-on-hostname)
          * [Routing Based on URL Path](#routing-based-on-url-path)
+      * [Shell Access](#shell-access)
       * [Taking Over Existing Backup](#taking-over-existing-backup)
       * [Migrating From CrashPlan for Home](#migrating-from-crashplan-for-home)
       * [Why CrashPlan Self Update Is Disabled](#why-crashplan-self-update-is-disabled)
@@ -214,7 +215,7 @@ container image.
 
   1.  Open the *Docker* application.
   2.  Click on *Registry* in the left pane.
-  3.  In the search bar, type the name of the container (`jlesage/docker-crashplan-pro`).
+  3.  In the search bar, type the name of the container (`jlesage/crashplan-pro`).
   4.  Select the image, click *Download* and then choose the `latest` tag.
   5.  Wait for the download to complete.  A  notification will appear once done.
   6.  Click on *Container* in the left pane.
@@ -291,6 +292,25 @@ few VNC clients support this method.  [SSVNC] is one of them.
 
 [SSVNC]: http://www.karlrunge.com/x11vnc/ssvnc.html
 
+### SSVNC
+
+[SSVNC] is a VNC viewer that adds encryption security to VNC connections.
+
+While the Linux version of [SSVNC] works well, the Windows version has some
+issues.  At the time of writing, the latest version `1.0.30` is not functional,
+as a connection fails with the following error:
+```
+ReadExact: Socket error while reading
+```
+However, for your convienence, an unoffical and working version is provided
+here:
+
+https://github.com/jlesage/docker-baseimage-gui/raw/master/tools/ssvnc_windows_only-1.0.30-r1.zip
+
+The only difference with the offical package is that the bundled version of
+`stunnel` has been upgraded to version `5.49`, which fixes the connection
+problems.
+
 ### Certificates
 
 Here are the certificate files needed by the container.  By default, when they
@@ -329,17 +349,6 @@ connection to prevent sending the password in clear over an unencrypted channel.
 the Remote Framebuffer Protocol [RFC](https://tools.ietf.org/html/rfc6143) (see
 section [7.2.2](https://tools.ietf.org/html/rfc6143#section-7.2.2)).  Any
 characters beyhond the limit are ignored.
-
-## Shell Access
-
-To get shell access to a the running container, execute the following command:
-
-```
-docker exec -ti CONTAINER sh
-```
-
-Where `CONTAINER` is the ID or the name of the container used during its
-creation (e.g. `crashplan-pro`).
 
 ## Reverse Proxy
 
@@ -437,6 +446,16 @@ server {
 }
 
 ```
+## Shell Access
+
+To get shell access to a the running container, execute the following command:
+
+```
+docker exec -ti CONTAINER sh
+```
+
+Where `CONTAINER` is the ID or the name of the container used during its
+creation (e.g. `crashplan-pro`).
 
 ## Taking Over Existing Backup
 
